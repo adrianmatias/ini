@@ -1,4 +1,4 @@
-"""The harness gate: the agent-facing files stay small, consistent with each other, and inherited.
+"""The harness gate: the agent-facing files stay small and consistent with each other.
 
 The harness is what every agent reads before it works, so its size is a budget and its consistency
 is a contract — the same compression the code is held to, applied to the instructions:
@@ -62,7 +62,7 @@ class Skill:
 
 
 class Harness(Gate):
-    """The instructions agents read: small, consistent, inherited, and started from an objective."""
+    """The instructions agents read: small, consistent, and started from an objective."""
 
     name = "harness"
     catches = "an oversized AGENTS.md or skill, a skill the table misses, kickoff placeholders left"
@@ -77,9 +77,8 @@ class Harness(Gate):
 
     @staticmethod
     def skills(project: Project) -> list[Skill]:
-        """The inherited skills and the project's own."""
-        roots = (project.base / "skills", project.root / "skills")
-        paths = sorted(p for root in roots for p in root.glob("*/SKILL.md"))
+        """Every skill on disk."""
+        paths = sorted(project.skills.glob("*/SKILL.md"))
         return [Skill.read(project, path) for path in paths]
 
     @staticmethod
@@ -87,7 +86,6 @@ class Harness(Gate):
         """AGENTS.md and the learnings files against their budgets."""
         budgets = {
             project.agents: AGENTS_LINES,
-            project.base / "learnings.md": LEARNINGS_LINES,
             project.root / "wiki" / "learnings.md": LEARNINGS_LINES,
         }
         if not project.agents.is_file():

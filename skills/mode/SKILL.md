@@ -6,7 +6,7 @@ description: Use when writing or changing code. Make it work, make it right, pra
 # mode
 
 The engineering loop: make it work, then make it right, then practice. The rules are in
-`base/foundation.md` and `base/code-standard.md`; this is the order in which to apply them.
+`foundation.md` and `code-standard.md`; this is the order in which to apply them.
 
 ## 1. make it work
 
@@ -53,10 +53,10 @@ Never in the same diff as step 1.
 - **Commit small, in order**: each message says why, what changed and how it was proved. Push only
   when the director says so.
 - **Guard the context window**: keep the main thread for decisions; send bulk reading and
-  mechanical edits to a lane (`base/skills/delegate`).
+  mechanical edits to a lane (`skills/delegate`).
 - **Close the round**: gates green, `now.md` rewritten, `log/agt.md` appended, the lesson in
   `wiki/learnings.md` under the failure class it prevents, the procedure — if it will recur — in
-  `skills/`. Then compress (`base/skills/compress`).
+  `skills/`. Then compress (`skills/compress`).
 
 ## pitfalls already paid for
 

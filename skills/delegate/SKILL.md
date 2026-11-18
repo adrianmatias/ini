@@ -33,11 +33,11 @@ evidence flows up as findings, never as summaries taken on trust.
 - **fan-out** — one question or one package per lane, read-only or on disjoint files; the
   integrator distils. Worth it from three lanes up.
 - **adversarial** — one critic pass by another family over the contract, the diff and the test
-  delta (`base/skills/review`). For anything that ships or that the director will repeat.
+  delta (`skills/review`). For anything that ships or that the director will repeat.
 - **cascade** — try the cheap role, verify mechanically, escalate one tier only on a proven
   failure, carrying the failure forward.
 - **expand / compress** — a lane may expand (drafts, options, a survey); compression is the
-  integrator's (`base/skills/compress`).
+  integrator's (`skills/compress`).
 
 Never split one decision or one document's argument across lanes.
 

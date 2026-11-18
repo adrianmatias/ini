@@ -8,8 +8,13 @@ deterministic gates that hold agent-written Python to them, each gate proven abl
 project shaped by them starts with an LLM carrying its steps and moves those steps, round by round,
 into deterministic code: a piece of engineering, not a thin wrapper around a model.
 
-Nothing is installed. A new project is a copy of this repository. An ongoing project is permeated:
-an agent reads ini and brings in what the project needs, when it needs it.
+Nothing is installed and nothing is linked. A new project is a copy of this repository. In an
+ongoing project, an agent reads ini and writes what the project needs into it, in the project's own
+terms. Either way the project owns what it took, keeps no tie back, and would stay green if ini
+vanished.
+
+Shared knowledge usually ends up as copies that drift or as a dependency that couples every project
+to one source. ini picks deliberate redundancy and leaves the refresh to an agent.
 
 ## start a project
 
@@ -18,18 +23,19 @@ git clone --depth 1 https://github.com/adrianmatias/ini my-project
 cd my-project && rm -rf .git && git init && uv sync
 ```
 
-Then ask your agent to run the kickoff (`base/skills/kickoff`). It replaces ini's own anchors, logs
+Then ask your agent to run the kickoff (`skills/kickoff`). It replaces ini's own anchors, logs
 and suite with the templates, names the package, points `[tool.ini]` at it, and asks you for the
 objective. `uv run python -m ci gates` stays red until the objective states a target someone else
 can check.
 
 ## bring ini into an ongoing project
 
-Point an agent at ini and at the project, and ask for the harvest skill (`base/skills/harvest`,
+Point an agent at ini and at the project, and ask for the harvest skill (`skills/harvest`,
 *down*). It works in two steps:
 
-1. **Harness**: `base/`, `ci/`, a `[tool.ini]` table that fits the project's layout, the gate tools
-   in its dev group, the skill rows in its `AGENTS.md`, and `python -m ci gates --adopt` to record
+1. **Harness**: `ci/`; the knowledge merged into the project's own foundation, code standard,
+   learnings and skills; a `[tool.ini]` table that fits the project's layout; the gate tools in its
+   dev group; the skill rows in its `AGENTS.md`; and `python -m ci gates --adopt` to record
    today's debt.
 2. **Compliance**: round by round the debt in `ci/ceilings.json` goes down, until it is empty.
 
@@ -40,8 +46,8 @@ The agent takes what fits and adapts it: a flat layout, a suite inside the packa
 
 | path | what | in a copy |
 |---|---|---|
-| `base/` | foundation, code standard, learnings, seven skills: the inherited knowledge | kept; improved only in ini |
-| `base/skills/kickoff/templates/` | the anchors with kickoff placeholders, and the walking skeleton (a `Target` and its loss, a run script, one behaviour test) | rendered by the kickoff |
+| `foundation.md`, `code-standard.md`, `wiki/learnings.md`, `skills/` | the knowledge: principles, rules, lessons, seven skills | kept, and owned by the project |
+| `skills/kickoff/templates/` | the anchors with kickoff placeholders, and the walking skeleton (a `Target` and its loss, a run script, one behaviour test) | rendered by the kickoff |
 | `ci/` | the gates, the ratchet and the ontology renderer, run with `uv run python -m ci` | kept, as the project's own harness |
 | `pyproject.toml` | the starter: Python ≥ 3.14, pydantic, the gate toolchain in the dev group | renamed; then the project's |
 | `objective.md`, `now.md`, `domain.md`, `AGENTS.md`, `log/` | ini's own anchors | replaced by the templates |
@@ -81,11 +87,12 @@ code).
 
 ## learning flows both ways
 
-- **Up**: a lesson or skill that held in two projects is generalised and moved into `base/` here
-  (`base/skills/harvest`, *up*), with project names stripped.
-- **Down**: an agent compares a project's `base/` and `ci/` with ini's and brings the difference
-  in; a new rule meeting old code is fixed or recorded as debt.
-- **Expand / compress**: every round ends compressed (`base/skills/compress`), and the harness gate
+- **Up**: a lesson or skill that held in two projects is generalised and moved into ini
+  (`skills/harvest`, *up*), with project names stripped.
+- **Down**: an agent reads ini as it is now, compares it with the project by meaning and distils
+  what applies; a new rule meeting old code is fixed or recorded as debt. Where the project departs from ini, the
+  departure either fits the project and stays, or is a lesson that goes up.
+- **Expand / compress**: every round ends compressed (`skills/compress`), and the harness gate
   holds the budgets that keep skills and lessons from exhausting the context they exist to save.
 
 ## why Python 3.14
@@ -95,5 +102,5 @@ The floor is 3.14: deferred annotations, template strings, supported free-thread
 pyyaml (no `cp315` wheels). Near-native is the default: the standard library first, pydantic at the
 wire, frozen dataclasses inside, beartype only at a seam that hands back `Any`.
 
-ini is its own first project: `uv run python -m ci gates` and `--prove` hold it to the base it
+ini is its own first project: `uv run python -m ci gates` and `--prove` hold it to the knowledge it
 carries.

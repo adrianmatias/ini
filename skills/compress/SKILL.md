@@ -51,7 +51,7 @@ The harness gate holds the budgets; this is how to stay under them with more kno
 - **Rank**: learnings are ordered by the cost of the failure they prevent; the bottom of a full
   list is the first to go.
 - **Generalise or keep local**: a skill or lesson that held in two projects goes upstream to ini
-  (`base/skills/harvest`); one that names this project's files stays here.
+  (`skills/harvest`); one that names this project's files stays here.
 - **Overfitting test**: a rule that mentions a single incident's file names or numbers in its
   imperative is a log entry pretending to be a rule. Restate it as the class of failure, keep the
   incident as its evidence.

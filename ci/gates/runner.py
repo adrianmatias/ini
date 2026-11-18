@@ -34,13 +34,13 @@ class Replica:
         self.into = into
 
     def build(self) -> Project:
-        """Copy the small root files, the Python scopes, the base and the harness directories."""
+        """Copy the small root files, the Python scopes, the skills and the harness directories."""
         source = self.project.root
         for path in source.iterdir():
             if path.is_file() and path.stat().st_size <= ROOT_FILE_BYTES:
                 shutil.copy2(path, self.into / path.name)
         top = {source / name for name in INPUTS} | {self.project.package, self.project.tests}
-        top |= {*self.project.scripts, self.project.base}
+        top |= set(self.project.scripts)
         for directory in sorted(p for p in top if p.is_dir() and p.is_relative_to(source)):
             target = self.into / directory.relative_to(source)
             if not target.exists():

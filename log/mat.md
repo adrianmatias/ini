@@ -65,3 +65,18 @@ it is not installable as a package, but an agent could inherit and permeate into
 i approve the agents edit
 remove specifics about the projects here. remove entries in /log if needed
 the commit/push
+
+## prompt
+
+i find a key contradiction. redundancy vs decoupling. ini as a central repository of knowledge standards, skills and gates has to be redundant across projects or make them interdependent. the approach of agents distilling into particular projects avoid any solution to the paradox
+more context at today's work on another project
+
+## prompt
+the decisions on me:
+
+1. Should the project get an origin, stamped with ini commit 3cca241? Its copy of Settings rejects unknown keys, so this needs a one-line field added in its ci/ as well.
+	1. no dependencies, no registered commit
+2. In a new project started from a copy, base/ is still kept as a separate folder (now owned by the project). Should it instead be folded into the project's own anchors, as that project did?
+	1. no need for base in ini nor the other project
+3. Commit and push this round?
+	1. yes after 1-2

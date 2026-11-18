@@ -12,7 +12,8 @@ red while any kickoff placeholder is left in an anchor: work starts after the ob
 
 1. Every `templates/**/*.tmpl` goes to the same path at the root, suffix dropped, with `{{project}}`,
    `{{package}}` (an importable name), `{{owner}}` (the director: `log/<owner>.md`) and `{{date}}`
-   replaced. ini's own `log/` and `ci/tests/` go.
+   replaced. ini's own `log/` and `ci/tests/` go; `foundation.md`, `code-standard.md`,
+   `wiki/learnings.md` and `skills/` stay, and the project owns them from now on.
 2. `pyproject.toml`: the project's name and description; `[tool.ini]` becomes `src = "src"`,
    `package = "<package>"`, `tests = "tests"`, `scripts = ["ci"]`; pytest's `testpaths` becomes
    `["tests"]` and its `pythonpath` `["src"]`; `[tool.uv]` gives way to a `[build-system]` of
@@ -39,9 +40,10 @@ first entity if not. The behaviour test that pins it is the project's first cont
 
 ## 2. the foundation (`foundation.md`)
 
-Only what this project adds to `base/foundation.md`: product invariants (pricing, privacy, dignity),
+A section at the end, named after the project, with only what it adds: product invariants (pricing, privacy, dignity),
 domain invariants (point-in-time data, money in `Decimal`), and the one or two rules that would be
-fatal to forget. Five lines is a good foundation; thirty is a second objective.
+fatal to forget. Five lines is a good section; thirty is a second objective. A general line that
+does not fit the project is edited or deleted, and the reason goes in `log/agt.md`.
 
 ## 3. the domain (`domain.md`)
 

@@ -6,11 +6,11 @@ The words ini uses, then the ontology rendered from the code (`uv run python -m 
 
 | term | means | is not |
 |---|---|---|
-| base | the inherited knowledge: foundation, code standard, learnings, skills; copied from ini, improved only there | a starting point to edit |
+| knowledge | `foundation.md`, `code-standard.md`, `wiki/learnings.md`, `skills/`: kept in a copy, distilled into an ongoing project, owned by it either way | a dependency on ini |
 | harness | `ci/`: the gates, the ratchet and the ontology renderer, run from the tree | an installed package |
-| template | the kickoff's placeholder anchors and walking skeleton (`base/skills/kickoff/templates/`) | ini's own anchors |
+| template | the kickoff's placeholder anchors and walking skeleton (`skills/kickoff/templates/`) | ini's own anchors |
 | copy | a new project: this repository cloned, then started by the kickoff | a fork that tracks ini |
-| permeate | an agent bringing part of ini into an existing project on demand: harness first, then compliance | a sync command |
+| distil | an agent rewriting ini into a project in the project's own terms: harness first, then compliance | a sync, a submodule, a pin or an import |
 | gate | a deterministic check with a witness it must reject | a lint suggestion |
 | witness | files planted in a scratch copy that must turn one gate red | a test of the project |
 | finding | one defect: path, line, rule, message, and the function when one is named | a warning |
@@ -42,7 +42,7 @@ flowchart LR
 
 ### ci
 
-The harness: deterministic gates that hold agent-written Python to the base, run from the tree.
+The harness: deterministic gates that hold agent-written Python to the code standard, run from the tree.
 
 No entities: a run layer or a module of pure helpers.
 
@@ -75,7 +75,7 @@ The deterministic gates: a maintained tool's rule where one exists, each one see
 | `Domain` | component | Gate |  | Wire fields that describe themselves, and an ontology page that matches the code. |
 | `Gate` | component |  |  | A deterministic check: the findings it reports, and the planted defect that proves it. |
 | `Skill` | value |  |  | One `SKILL.md`: where it is, what its frontmatter says, and how long it is. |
-| `Harness` | component | Gate |  | The instructions agents read: small, consistent, inherited, and started from an objective. |
+| `Harness` | component | Gate |  | The instructions agents read: small, consistent, and started from an objective. |
 | `Ceilings` | component |  |  | The ratchet's record: per gate, per finding key, how many findings are tolerated. |
 | `Run` | value |  | Scope | One ruff invocation: the scope it reads, the rules it selects, the settings it overrides. |
 | `Ruff` | component |  |  | ruff, asked for findings in JSON and decoded once. |

@@ -1,9 +1,8 @@
 # learnings
 
-Inherited from ini; do not edit here. Lessons that held in more than one project, one imperative
-rule per line with the evidence that bought it. A project's own lessons live in its
-`wiki/learnings.md`; one that holds twice moves here (`base/skills/harvest`). Grouped by the class
-of failure it prevents; budget 160 lines.
+One imperative rule per line with the evidence that bought it, grouped by the class of failure it
+prevents; newest evidence folds into its section. A project appends its own; one that holds in
+another project goes up to ini (`skills/harvest`). Budget 160 lines (harness gate).
 
 ## 1. Boundaries own the defects
 

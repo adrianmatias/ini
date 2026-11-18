@@ -4,20 +4,22 @@ What is true today; rewritten every round.
 
 ## state
 
-- 2026-11-18: ini 0.2.0 is a repository of knowledge in the shape of a fresh repository, not an
-  installable package. `base/` holds the inherited knowledge; `ci/` holds the harness (13 gates,
-  ratchet, ontology), run from the tree with `uv run python -m ci`; the kickoff's templates hold
-  the placeholder anchors and the walking skeleton. Committed and pushed; the repository is still
-  private.
-- Proved: 12 behaviour tests, gates 13/13, `--prove` 13/13. End to end outside the suite: a copy,
-  started by the kickoff's mechanical steps, with its own `uv sync`, was 13/13 and its run script
-  ran.
-- Inheritance is an agent's job: harvest *down*, in two steps (harness, then compliance).
+- 2026-11-18: ini is a repository of knowledge in the shape of a fresh repository, not an
+  installable package. The knowledge sits at the root like any project's: `foundation.md`,
+  `code-standard.md`, `wiki/learnings.md`, `skills/`. `ci/` holds the harness (13 gates, ratchet,
+  ontology), run from the tree with `uv run python -m ci`. The kickoff's templates hold the
+  placeholder anchors and the walking skeleton. There is no `base/`.
+- Distil, don't link: a project owns what it took from ini, in its own terms, with no dependency
+  and no recorded commit, and would stay green if ini vanished. Refreshing is an agent reading ini
+  as it is now and comparing by meaning. A departure from ini is either local fit or a lesson that
+  goes up.
+- First distillate in the field: an ongoing project took `ci/` as its own, added a product gate and
+  kept its own anchors.
+- Proved: 12 behaviour tests, gates 13/13, `--prove` 13/13.
 - No project, client or employer names anywhere in the repository, logs included.
 
 ## next
 
-1. Permeate an ongoing project (harvest *down*, step 1), then a second one with an older runtime.
-2. Open: the harness code needs Python 3.14; a project whose runtime is older runs the gates under
-   3.14 only if its code imports there.
-3. Make the repository public when the director decides.
+1. Distil into a second ongoing project with an older runtime; Python 3.14 is still the harness
+   floor.
+2. Make the repository public when the director decides.

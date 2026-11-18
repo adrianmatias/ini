@@ -1,6 +1,6 @@
 # code standard
 
-Inherited from ini; do not edit here. Tier 4: it derives from `foundation.md`, and a rule is kept
+Tier 4, owned by the project: it derives from `foundation.md`, and a rule is kept
 because a gate fails without it — or it says here why nothing can enforce it. Compact on purpose: a
 standard that takes ten minutes to read is paraphrased, not followed.
 
@@ -67,7 +67,7 @@ standard that takes ten minutes to read is paraphrased, not followed.
 - **A golden is a pinned value** that moves only with a written reason.
 - **Do not test the implementation.** A refactor that keeps behaviour must not rewrite the suite.
 - **Mutation testing is an audit**, run before a release one module at a time; a surviving mutant is
-  a missing behaviour test or dead code (`base/skills/mode`).
+  a missing behaviour test or dead code (`skills/mode`).
 
 ## gates
 

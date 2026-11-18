@@ -58,3 +58,35 @@ Proved: `uv run pytest` 12 passed; `uv run python -m ci gates` 13/13; `--prove` 
 - `AGENTS.md` rewritten for the template model; the publishable rule now covers the logs too.
 - Both logs compressed and stripped of project names, paths and local tool state.
 - First commit of the template, pushed.
+
+## redundancy vs decoupling: distil, don't link
+
+- The director's contradiction: shared knowledge is either a copy in every project (redundant, and
+  it drifts) or one central source (and the projects depend on it). The resolution is his, an agent
+  distilling into each project, and it is now the model. A project owns its distillate and stays
+  whole without ini; `[tool.ini] origin` records the ini commit it read. *Again* reads
+  `git log <origin>..` and brings in what applies, rather than diffing trees, because the trees are
+  meant to diverge.
+- Evidence: the first ongoing project to take ini did this already. It kept `ci/` as its own, added
+  a product gate to it and left `base/` out of the tree. The old harvest text ("never edited in
+  place") would have marked that as a fork.
+- Changed: foundation (header; "Distil, don't link"), harvest (down rewritten, "what never
+  crosses"), the headers of code-standard, learnings and base README, the kickoff's step 0 and
+  AGENTS template, objective (claim, target 2, kill), README, AGENTS, domain words (distil, origin),
+  `Settings.origin`.
+
+Proved: gates 13/13, `--prove` 13/13, `uv run pytest` 12 passed.
+
+## no base, no origin
+
+- The director, on the two open decisions: no dependency and no registered commit; no `base/` in
+  ini or in a project.
+- `base/` dissolved into the root, where a project keeps its knowledge: `foundation.md`,
+  `code-standard.md`, `wiki/learnings.md`, `skills/`. A copy keeps them and owns them. The
+  kickoff's foundation and learnings templates are gone, so a project's invariants go in a section
+  at the end of `foundation.md`, and a new copy carries six kickoff placeholders instead of seven.
+- `Settings.base` and `Settings.origin` were removed; the harness reads `skills/` and
+  `wiki/learnings.md` only. *Again* in harvest means reading ini as it is now (its log and `now.md`
+  say what moved) and comparing with the project by meaning.
+
+Proved: gates 13/13, `--prove` 13/13, `uv run pytest` 12 passed.

@@ -42,12 +42,13 @@ class Refused(Exception):
 '''
 
 
-def test_a_copy_starts_with_the_skeleton_and_the_base(project) -> None:
+def test_a_copy_starts_with_the_skeleton_and_the_knowledge(project) -> None:
     for path in ("AGENTS.md", "objective.md", "log/director.md", "src/demo/core/objective.py"):
         assert (project / path).is_file(), path
-    assert (project / "base/skills/kickoff/SKILL.md").is_file()
+    for path in ("foundation.md", "code-standard.md", "wiki/learnings.md", "skills/kickoff/SKILL.md"):
+        assert (project / path).is_file(), path
     assert not (project / "ci/tests").exists(), "ini's own suite stays in ini"
-    rendered = [p for p in project.rglob("*{{*") if not p.is_relative_to(project / "base")]
+    rendered = [p for p in project.rglob("*{{*") if not p.is_relative_to(project / "skills")]
     assert not rendered, "a placeholder is left in a path"
 
 

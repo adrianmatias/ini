@@ -1,16 +1,16 @@
 # {{project}} — agent contract
 
 Portable rules, read first by any agent in this repository, in any harness. One file; do not
-duplicate it. Inherited rules live in `base/` (copied from ini, never edited here).
+duplicate it.
 
 ## entry (every session)
 
-1. Read the tiers in order: `objective.md` → `base/foundation.md` and `foundation.md` →
-   `domain.md` → `base/code-standard.md`.
+1. Read the tiers in order: `objective.md` → `foundation.md` →
+   `domain.md` → `code-standard.md`.
 2. Read `now.md` (what is true today) and the **latest prompt at the bottom of `log/{{owner}}.md`**:
    that is the task.
-3. Read the skill whose trigger matches (table below), `wiki/learnings.md` and
-   `base/learnings.md` when the task touches their failure classes, then only the files it needs.
+3. Read the skill whose trigger matches (table below), `wiki/learnings.md` when the task
+   touches its failure classes, then only the files it needs.
 4. Do the work. Close the round: gates green, `now.md` rewritten, `log/agt.md` appended, the lesson
    (if the round cost one) in `wiki/learnings.md`, the procedure (if it will recur) in `skills/`.
 
@@ -22,13 +22,13 @@ implementation`. Lower tiers obey higher ones; a conflict escalates upward. Stat
 
 Each round is one breath. **Expand**: generate paths toward the objective, build, make it work.
 **Compress**: judge against the objective, kill with reasons, fold what survived into fewer
-concepts, lines and files, name the one next move (`base/skills/compress`). Say which phase the
+concepts, lines and files, name the one next move (`skills/compress`). Say which phase the
 round is in; end every round compressed.
 
 ## roles and models
 
 Machine-local: edit the right columns when providers change; skills speak in roles only
-(`base/skills/delegate`).
+(`skills/delegate`).
 
 | role | model (2026-11) | effort |
 |---|---|---|
@@ -49,9 +49,9 @@ on one plan exhausted its rate limit in three minutes.
 
 ## skills
 
-Procedures that recur live in `skills/<name>/SKILL.md` (this project's) and `base/skills/<name>/`
-(inherited). Read the one whose trigger matches before starting; fix a project skill when it was
-wrong; propose a base fix upstream. A procedure done twice without a skill is a failure of the
+Procedures that recur live in `skills/<name>/SKILL.md`. Read the one whose trigger matches before
+starting; fix a skill when it was wrong, and propose the fix to ini when it holds beyond this
+project. A procedure done twice without a skill is a failure of the
 round that did it second.
 
 | skill | use when |
@@ -67,7 +67,7 @@ round that did it second.
 ## gates
 
 `uv run python -m ci gates` — red blocks the change; `--prove` plants a defect per gate in a scratch copy.
-Rules and the gate table: `base/code-standard.md`. Debt recorded in `ci/ceilings.json` only shrinks.
+Rules and the gate table: `code-standard.md`. Debt recorded in `ci/ceilings.json` only shrinks.
 
 ## do
 
@@ -78,7 +78,6 @@ Rules and the gate table: `base/code-standard.md`. Debt recorded in `ci/ceilings
 ## don't
 
 - Don't put volatile state in an anchor: status and queue go to `now.md`.
-- Don't edit `base/`: improve it in ini, then bring it back (`base/skills/harvest`).
 - Don't install orchestration to feel agentic: no router, no personas, no ticket system.
 - Don't commit or push unless the director says so.
 

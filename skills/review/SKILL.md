@@ -11,7 +11,7 @@ different family, over a precisely cut context, finds what the author cannot.
 ## what the critic gets
 
 - **The contract**: the objective's relevant lines, the requirement ids, the acceptance checks, the
-  invariants from `base/foundation.md` that apply.
+  invariants from `foundation.md` that apply.
 - **The artifact**: the diff, or the document, whole.
 - **The test delta**: what tests were added, changed or deleted.
 - **Not** the author's reasoning, plan or conversation: fresh context is the point.
@@ -26,7 +26,7 @@ Findings, each one checkable without trusting the critic:
 - `fix`: the smallest change that would resolve it, or «unknown».
 
 Tell the critic that «no finding» is an acceptable answer, that a finding without evidence is
-discarded, and that style preferences are not findings unless a rule in `base/code-standard.md`
+discarded, and that style preferences are not findings unless a rule in `code-standard.md`
 names them.
 
 ## judge the findings

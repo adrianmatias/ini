@@ -22,7 +22,7 @@ def test_a_new_project_is_red_only_until_its_objective_is_stated(project, capsys
     out = capsys.readouterr().out
     assert "green: 12/13" in out
     assert "not green: harness" in out
-    assert out.count(" kickoff ") == 7
+    assert out.count(" kickoff ") == 6
     for page in project.glob("*.md"):
         page.write_text(page.read_text().replace("TODO(kickoff)", "stated"))
     assert gates(project) == 0

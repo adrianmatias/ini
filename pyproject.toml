@@ -4,12 +4,12 @@
 
 [project]
 name = "ini"
-version = "0.2.0"
+version = "0.3.0"
 description = "A live cookiecutter for AI agents: knowledge in the shape of a fresh repository"
 readme = "README.md"
 license = "MIT"
 # 3.14 is the floor: deferred annotations, template strings, supported free-threading. Check the
-# dependencies for wheels before moving to 3.15 (`base/learnings.md`).
+# dependencies for wheels before moving to 3.15 (`wiki/learnings.md`).
 requires-python = ">=3.14"
 dependencies = [
     "pydantic>=2.14",

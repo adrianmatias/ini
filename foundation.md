@@ -1,9 +1,9 @@
 # foundation
 
-Inherited from ini; do not edit here — improve it upstream (`base/skills/harvest`). Tier 2 of
-`objective > foundation > domain > code-standard > gates and behaviour tests > implementation`. A
-project adds its own invariants in its `foundation.md`; where the two disagree, the project's
-objective decides and the conflict goes upstream.
+Tier 2 of `objective > foundation > domain > code-standard > gates and behaviour tests >
+implementation`. The project owns this file: it adds its own invariants in a section at the end,
+and edits any line its objective overrides. A change that would hold elsewhere goes up to ini
+(`skills/harvest`).
 
 **Simplicity leads. Compression is the core of intelligence.** Redundancy is what a wrong concept
 looks like from outside: two files that say the same thing, two functions that derive the same
@@ -69,7 +69,11 @@ statement unnecessary.
 - **Skills over plugins.** Plain files any agent reads on demand travel across harnesses, vendors
   and years; a plugin binds the method to one tool.
 - **What generalises goes upstream.** A skill or lesson that holds in two projects moves into ini,
-  and every project takes it in the next time an agent brings ini down.
+  and every project takes it in the next time an agent distils ini down.
+- **Distil, don't link.** Inside a repository a fact has one home. Between repositories, sharing
+  means either drifting copies or a dependency. Choose deliberate redundancy: an agent rewrites the
+  shared knowledge into each project in that project's terms, with no pointer back. Each
+  repository stays whole on its own.
 
 ## sovereignty
 

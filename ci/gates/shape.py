@@ -125,7 +125,7 @@ class Shape(Gate):
     @staticmethod
     def out_of_scope(project: Project) -> list[Finding]:
         """Python files no gate reads."""
-        scoped = (*project.paths(Scope.ALL), project.base)
+        scoped = (*project.paths(Scope.ALL), project.skills)
         return [
             Finding(project.relative(path), 1, "scope", "no gate reads this file: move it into "
                     "the package, the tests or a [tool.ini] scripts directory")

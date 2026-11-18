@@ -8,7 +8,7 @@ import pytest
 from ci.cli.main import main
 
 ROOT = Path(__file__).resolve().parents[2]
-TEMPLATES = ROOT / "base/skills/kickoff/templates"
+TEMPLATES = ROOT / "skills/kickoff/templates"
 IGNORED = shutil.ignore_patterns(".git", ".venv", "__pycache__", "*.pyc", ".obsidian", ".*_cache")
 HARNESS = 'src = "."\npackage = "ci"\ntests = "ci/tests"\n'
 PROJECT = 'src = "src"\npackage = "demo"\ntests = "tests"\nscripts = ["ci"]\n'

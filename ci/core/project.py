@@ -38,8 +38,6 @@ class Settings(BaseModel):
     """Directory of the behaviour suite."""
     scripts: tuple[str, ...] = ()
     """Directories of hand-run scripts: linted, typed and annotated, never measured for coverage."""
-    base: str = "base"
-    """Directory of the inherited files: copied from ini, improved upstream, never edited here."""
     domain: str = "domain.md"
     """Page that holds the rendered ontology."""
     agents: str = "AGENTS.md"
@@ -90,9 +88,9 @@ class Project:
         return tuple(p for p in (self.root / s for s in self.settings.scripts) if p.is_dir())
 
     @property
-    def base(self) -> Path:
-        """The inherited files."""
-        return self.root / self.settings.base
+    def skills(self) -> Path:
+        """The procedures agents read when their trigger matches, one directory per skill."""
+        return self.root / "skills"
 
     @property
     def domain(self) -> Path:
