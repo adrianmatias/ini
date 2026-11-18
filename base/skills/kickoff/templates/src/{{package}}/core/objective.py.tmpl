@@ -1,0 +1,36 @@
+"""The objective as code: the target `objective.md` states, and the loss that closes on it.
+
+Every round asks one question of the work — did the loss go down? — so the target lives here as a
+value the suite can check, not only as prose. Keep it when the objective is a metric; replace it
+with the first entity the objective names when it is not.
+"""
+
+from enum import StrEnum
+
+from pydantic import BaseModel, ConfigDict
+
+
+class Direction(StrEnum):
+    """Which way the metric improves."""
+
+    UP = "up"
+    DOWN = "down"
+
+
+class Target(BaseModel):
+    """The objective's checkable target: a metric, the value that wins, and which way is better."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", use_attribute_docstrings=True)
+
+    metric: str
+    """What is measured, named as `objective.md` names it."""
+    threshold: float
+    """The value at which the objective is met."""
+    direction: Direction = Direction.UP
+    """Whether a higher or a lower measurement is better."""
+
+    def loss(self, measured: float) -> float:
+        """How far a measurement is from the target; zero once it is met."""
+        if self.direction is Direction.DOWN:
+            return max(measured - self.threshold, 0.0)
+        return max(self.threshold - measured, 0.0)

@@ -1,0 +1,27 @@
+"""`loss` — how far a measurement is from the objective's target; exit 0 once it is met.
+
+  uv run python -m {{package}}.cli.loss --target target.json --measured 0.71
+"""
+
+import argparse
+import sys
+from collections.abc import Sequence
+from pathlib import Path
+
+from {{package}}.core.objective import Target
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Read the target, print the loss, and say with the exit code whether the target is met."""
+    parser = argparse.ArgumentParser(description="the loss between a measurement and the target")
+    parser.add_argument("--target", type=Path, required=True, help="a Target, as JSON")
+    parser.add_argument("--measured", type=float, required=True, help="the measured value")
+    args = parser.parse_args(argv)
+    target = Target.model_validate_json(args.target.read_text())
+    loss = target.loss(args.measured)
+    print(f"{target.metric}: loss {loss:g}")
+    return 0 if loss == 0 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

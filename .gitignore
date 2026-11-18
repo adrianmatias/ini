@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.coverage
+.pytest_cache/
+.ruff_cache/
+dist/
+.tmp/
+.idea/
+# Editor state is per machine: a sweeping `git add` once committed an editor's hotkeys.
+.obsidian/
+.env

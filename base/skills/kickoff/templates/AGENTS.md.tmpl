@@ -1,0 +1,93 @@
+# {{project}} — agent contract
+
+Portable rules, read first by any agent in this repository, in any harness. One file; do not
+duplicate it. Inherited rules live in `base/` (copied from ini, never edited here).
+
+## entry (every session)
+
+1. Read the tiers in order: `objective.md` → `base/foundation.md` and `foundation.md` →
+   `domain.md` → `base/code-standard.md`.
+2. Read `now.md` (what is true today) and the **latest prompt at the bottom of `log/{{owner}}.md`**:
+   that is the task.
+3. Read the skill whose trigger matches (table below), `wiki/learnings.md` and
+   `base/learnings.md` when the task touches their failure classes, then only the files it needs.
+4. Do the work. Close the round: gates green, `now.md` rewritten, `log/agt.md` appended, the lesson
+   (if the round cost one) in `wiki/learnings.md`, the procedure (if it will recur) in `skills/`.
+
+Steering: `objective > foundation > domain > code-standard > gates and behaviour tests >
+implementation`. Lower tiers obey higher ones; a conflict escalates upward. State is not a tier:
+`now.md`, the learnings, `skills/` and `log/` record; they do not steer.
+
+## rhythm
+
+Each round is one breath. **Expand**: generate paths toward the objective, build, make it work.
+**Compress**: judge against the objective, kill with reasons, fold what survived into fewer
+concepts, lines and files, name the one next move (`base/skills/compress`). Say which phase the
+round is in; end every round compressed.
+
+## roles and models
+
+Machine-local: edit the right columns when providers change; skills speak in roles only
+(`base/skills/delegate`).
+
+| role | model (2026-11) | effort |
+|---|---|---|
+| director | {{owner}} | — |
+| integrator | claude-opus on the Anthropic plan: plans, integrates, writes what the director reads | high |
+| lane | deepseek-v4.1-flash on the DeepSeek API: volume, parallel lanes | max |
+| critic | the family that did not write it: DeepSeek reviews Opus, Opus reviews DeepSeek | high |
+
+The default is one session, direct. Never run parallel lanes on the integrator's quota: four lanes
+on one plan exhausted its rate limit in three minutes.
+
+## log
+
+- `log/{{owner}}.md` — the director's log. Append-only; never edit it. Voice prompts count: append
+  the transcript, lightly cleaned, before starting the round.
+- `log/agt.md` — the agent's replies: append-only, one entry per round, H1 = `# YYYY-MM-DD`, topic
+  subsections under `##`. Never rewrite, reorder or delete an earlier entry.
+
+## skills
+
+Procedures that recur live in `skills/<name>/SKILL.md` (this project's) and `base/skills/<name>/`
+(inherited). Read the one whose trigger matches before starting; fix a project skill when it was
+wrong; propose a base fix upstream. A procedure done twice without a skill is a failure of the
+round that did it second.
+
+| skill | use when |
+|---|---|
+| `kickoff` | the project starts or its bet changes |
+| `mode` | writing or changing code: make it work, make it right, practice |
+| `review` | a change, plan or artifact needs a critic from another family |
+| `delegate` | work could fan out: roles, patterns, briefs, integration |
+| `restructure` | reshaping code without changing behaviour |
+| `compress` | a round ends, or code, docs or skills have grown |
+| `harvest` | a lesson holds beyond this project, or ini has moved on |
+
+## gates
+
+`uv run python -m ci gates` — red blocks the change; `--prove` plants a defect per gate in a scratch copy.
+Rules and the gate table: `base/code-standard.md`. Debt recorded in `ci/ceilings.json` only shrinks.
+
+## do
+
+- Cite or omit. Compile knowledge once; do not re-retrieve it every session.
+- Guides for the director: concise and complete. His attention is the bottleneck.
+- Refactor first, then change. One decision in one place. Subtract before you add.
+
+## don't
+
+- Don't put volatile state in an anchor: status and queue go to `now.md`.
+- Don't edit `base/`: improve it in ini, then bring it back (`base/skills/harvest`).
+- Don't install orchestration to feel agentic: no router, no personas, no ticket system.
+- Don't commit or push unless the director says so.
+
+## commands
+
+```
+uv sync                                        # the environment, from uv.lock
+uv run python -m ci gates                      # every gate (--prove, --record, --only <gate>)
+uv run pytest                                  # the behaviour suite alone
+uv run python -m ci domain --write             # re-render the ontology into domain.md
+uv run python -m {{package}}.cli.loss --help   # the walking skeleton's run script
+```
