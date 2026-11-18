@@ -80,3 +80,16 @@ the decisions on me:
 	1. no need for base in ini nor the other project
 3. Commit and push this round?
 	1. yes after 1-2
+
+## prompt
+
+add ini/ini
+place a madedonia with entities, classes and scripts for ingredients and recipes for macedonia and simple fruit salads.
+minimal and illustrative so the domain and gates do not need to self-apply
+
+## prompt
+
+i reverted the fruit thing
+3. Back to ini: three harness fixes the project needed would help any project with a lot of data: the scratch-copy data link, running the test gate over both test folders, and treating field docstrings as text, not code. Say if you want them committed to ini.
+	1. ok but i do it from another session
+context at the latest prompt at the bottom of another project's log: today

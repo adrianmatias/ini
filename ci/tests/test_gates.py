@@ -34,6 +34,31 @@ def test_every_gate_rejects_its_witness(kicked_off, capsys) -> None:
     assert not list(kicked_off.rglob("ini_witness*.py")), "a witness leaked into the real tree"
 
 
+def test_a_suite_that_reads_data_still_proves_its_witness(kicked_off, capsys) -> None:
+    (kicked_off / "data").mkdir()
+    (kicked_off / "data/answer.txt").write_text("42\n")
+    read = 'ANSWER = (Path(__file__).parents[1] / "data/answer.txt").read_text()\n'
+    conftest = '"""Data."""\n\nfrom pathlib import Path\n\n' + read
+    (kicked_off / "tests/conftest.py").write_text(conftest)
+    assert gates(kicked_off, "--only", "behaviour") == 0
+    assert gates(kicked_off, "--prove", "--only", "behaviour") == 0, "the replica reaches the data"
+    assert not (kicked_off / "data").is_symlink()
+    capsys.readouterr()
+
+
+def test_the_behaviour_gate_runs_every_suite_testpaths_names(kicked_off, capsys) -> None:
+    (kicked_off / "more").mkdir()
+    (kicked_off / "more/test_more.py").write_text(
+        '"""More."""\n\n\ndef test_more() -> None:\n    assert 1 == 2\n'
+    )
+    pyproject = kicked_off / "pyproject.toml"
+    pyproject.write_text(
+        pyproject.read_text().replace('testpaths = ["tests"]', 'testpaths = ["tests", "more"]')
+    )
+    assert gates(kicked_off, "--only", "behaviour") == 1
+    assert "more/test_more.py" in capsys.readouterr().out
+
+
 def test_the_ratchet_holds_debt_and_only_shrinks(kicked_off, capsys) -> None:
     debt = kicked_off / "src/demo/debt.py"
     debt.write_text(DEBT)

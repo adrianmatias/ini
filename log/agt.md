@@ -90,3 +90,19 @@ Proved: gates 13/13, `--prove` 13/13, `uv run pytest` 12 passed.
   say what moved) and comparing with the project by meaning.
 
 Proved: gates 13/13, `--prove` 13/13, `uv run pytest` 12 passed.
+
+## harvest up: three fixes from the first distillate
+
+- The fruit-salad example was reverted by the director; `ci/` is again the package the gates judge.
+- **Data link**: `Replica.link` symlinks whatever the replica did not copy, and descends into the
+  copied directories. Without it, a suite that reads project data at collection errored in the
+  scratch copy; the error was not located in the planted file, so the behaviour witness looked inert.
+  Test: a conftest that reads `data/` at import, with `--prove --only behaviour` green.
+- **Every suite**: the behaviour gate runs pytest without a path, so it collects what `testpaths`
+  names. Before, it ran only `[tool.ini] tests`. Test: a failing test in a second `testpaths`
+  folder turns the gate red.
+- Both tests fail on the previous harness and pass on this one.
+- **Field docstrings as prose**: this fix lives in a project's own literal-counting gate, and ini
+  has no gate that counts literals. It came up as a lesson instead (`wiki/learnings.md` §1).
+
+Proved: gates 13/13, `--prove` 13/13, `uv run pytest` 14 passed.

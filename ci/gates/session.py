@@ -46,13 +46,14 @@ class Suite:
 
     @classmethod
     def measure(cls, tool: Tool) -> Suite:
-        """Run pytest under coverage over the production package and read the per-function report."""
+        """Run pytest under coverage over the production package and read the per-function report.
+        pytest collects what `testpaths` names, so a project with more than one suite runs them all."""
         project = tool.project
         with TemporaryDirectory() as scratch:
             data, report = Path(scratch) / ".coverage", Path(scratch) / "coverage.json"
             outcome = tool.run(
                 "coverage", "run", f"--data-file={data}", f"--source={project.package}",
-                "-m", "pytest", str(project.tests), "-p", "no:cacheprovider",
+                "-m", "pytest", "-p", "no:cacheprovider",
             )  # fmt: skip
             tool.run("coverage", "json", f"--data-file={data}", "-o", str(report), "-q")
             covered = cls.read(project, report) if report.is_file() else {}

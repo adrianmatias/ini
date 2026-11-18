@@ -58,7 +58,8 @@ The steering ladder every project shares:
 ## the gates
 
 `uv run python -m ci gates` runs them; red blocks the change. `--prove` copies the project's gate
-inputs to a scratch directory, plants one defect per gate there, and fails if any gate lets its
+inputs to a scratch directory and links the rest, so a suite that reads data runs there as in the
+tree. It plants one defect per gate in that directory and fails if any gate lets its
 defect through. `--adopt` records an existing project's debt once; from then on `ci/ceilings.json`
 only shrinks (`--record` lowers it after a fix; a record above what the gate measures is red).
 
@@ -75,7 +76,7 @@ only shrinks (`--record` lowers it after a fix; a record above what the gate mea
 | deadcode | a name written and never wired | vulture |
 | domain | a wire-model field that does not describe itself; a `domain.md` ontology older than the code | AST |
 | harness | an `AGENTS.md` over 120 lines, a skill over 150 or with bad frontmatter, a skill the table misses, kickoff placeholders left | files |
-| behaviour | the pytest suite | pytest |
+| behaviour | the pytest suite, every folder `testpaths` names | pytest |
 | crap | complexity the suite does not run: `c²·(1−cov)³ + c > 8` | ruff + coverage |
 
 Four of them are what agent-written code needs most and no single tool holds: **domain-driven

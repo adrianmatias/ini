@@ -89,7 +89,7 @@ shrinks, and `--record` lowers it after a fix.
 | deadcode | a name written and never wired (vulture; tests excluded on purpose) |
 | domain | an undescribed wire field; a `domain.md` ontology older than the code |
 | harness | an oversized `AGENTS.md` or skill, a skill the table misses, kickoff left |
-| behaviour | the pytest suite |
+| behaviour | the pytest suite, every folder `testpaths` names |
 | crap | a complex function the suite does not run (`complexity²·(1−coverage)³ + complexity > 8`) |
 
 ## refuses

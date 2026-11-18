@@ -34,7 +34,7 @@ class Replica:
         self.into = into
 
     def build(self) -> Project:
-        """Copy the small root files, the Python scopes, the skills and the harness directories."""
+        """Copy the small root files, the Python scopes, the skills and the harness; link the rest."""
         source = self.project.root
         for path in source.iterdir():
             if path.is_file() and path.stat().st_size <= ROOT_FILE_BYTES:
@@ -45,7 +45,22 @@ class Replica:
             target = self.into / directory.relative_to(source)
             if not target.exists():
                 shutil.copytree(directory, target, ignore=IGNORED)
+        self.link(source, self.into)
         return Project(self.into, self.project.settings)
+
+    @classmethod
+    def link(cls, source: Path, into: Path) -> None:
+        """Link whatever was not copied: a suite that reads the project's data runs in the replica
+        as it runs in the tree, so only the planted witness can turn it red. A copied directory is
+        descended into, so data beside a copied scope (scripts inside a data directory) is reached."""
+        for path in sorted(source.iterdir()):
+            target = into / path.name
+            if IGNORED(str(source), [path.name]):
+                continue
+            if not target.exists() and not target.is_symlink():
+                target.symlink_to(path, target_is_directory=path.is_dir())
+            elif path.is_dir() and target.is_dir() and not target.is_symlink():
+                cls.link(path, target)
 
     def plant(self, files: dict[str, str]) -> Project:
         """Build the copy and write the witness files into it."""

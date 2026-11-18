@@ -16,6 +16,9 @@ another project goes up to ini (`skills/harvest`). Budget 160 lines (harness gat
   corruptions — `must_fix: "none"` iterates per character.
 - **Derive the gate scope from the repository, not from a sentence.** A second package passed every
   gate for weeks because no gate looked at it (2026-11-05).
+- **A gate that reads string literals reads a bare string statement as prose.** Field docstrings
+  are docstrings too: 684 of them counted as product copy in Python until the rule said so
+  (2026-11-18).
 - **A diagram is a claim; render it from the code.** A hand-drawn package map kept two edges for
   weeks after both were gone (2026-11-11).
 

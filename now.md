@@ -14,8 +14,9 @@ What is true today; rewritten every round.
   as it is now and comparing by meaning. A departure from ini is either local fit or a lesson that
   goes up.
 - First distillate in the field: an ongoing project took `ci/` as its own, added a product gate and
-  kept its own anchors.
-- Proved: 12 behaviour tests, gates 13/13, `--prove` 13/13.
+  kept its own anchors. Its generic fixes came back up: the `--prove` replica links what it does
+  not copy (data), and the behaviour gate runs every suite `testpaths` names.
+- Proved: 14 behaviour tests, gates 13/13, `--prove` 13/13.
 - No project, client or employer names anywhere in the repository, logs included.
 
 ## next
