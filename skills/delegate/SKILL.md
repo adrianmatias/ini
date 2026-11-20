@@ -15,14 +15,15 @@ each role to a model; this file speaks in roles only.
 | role | who | does | never |
 |---|---|---|---|
 | director | the human | sets the objective, decides, judges taste, approves pushes | is asked what the files already say |
-| integrator | the session, strong model, high effort | plans, writes what the director reads, merges, judges | runs parallel lanes on its own quota |
-| lane | cheap model, maximum effort, fresh context | one bounded slice: ingest, extraction, a package, a draft | decides a design, edits a file outside its list |
+| integrator | the session, strong model (plan-backed or pay-per-token complement), high effort | plans, writes what the director reads, merges, judges | runs parallel lanes on a plan quota or burns paid tokens on bulk |
+| lane | cheap API model, maximum effort, fresh context | one bounded slice: ingest, extraction, a package, a draft | decides a design, edits a file outside its list |
 | critic | a different model family, high effort | reads the contract and the diff, returns failing cases | sees the author's reasoning |
 
-Effort follows the role, not the mood: a cheap model is slow and weak below its maximum effort, so
-lanes run at max; a strong model at max effort on volume is the expensive mistake. Steering flows
-down the tiers (`objective > foundation > domain > code-standard > gates > implementation`);
-evidence flows up as findings, never as summaries taken on trust.
+Effort and billing follow the role: a cheap model is slow and weak below maximum effort, so lanes
+run at max; never run parallel lanes on a plan quota, never burn pay-per-token strong models on
+bulk, and never run two strong families on the same job. Steering flows down the tiers
+(`objective > foundation > domain > code-standard > gates > implementation`); evidence flows up as
+findings, never as summaries taken on trust.
 
 ## patterns
 
@@ -43,14 +44,18 @@ Never split one decision or one document's argument across lanes.
 
 ## before a fan-out
 
-- **Probe the route** with one real tool call on the lane's model; an all-null result is a route
-  failure, never «finished».
+- **Confirm the model before dispatching.** Check which model and family a lane or critic will
+  actually run on; if a session policy blocks the route or a critic would share the author's family,
+  stop and ask or switch once — never spawn a call that dies, never report a same-family pass as
+  cross-family, and never shell out to another LLM CLI inside a session.
+- **Undo temporary model overrides at once**: verify the active child's model after dispatching and
+  restore the default right after spawning, before children finish.
 - **Decide the cross-cutting things first** and commit them on the base: a changed rule, a new
   dependency, a convention. Left open, they come back as N incompatible guesses.
 - **Snapshot or worktree**: on a dirty tree, archive what lanes may touch; on a clean one, one git
   worktree per write lane.
 - All lanes of a round go out in one call unless one lane's output is another's input; spend the
-  wait on work no lane touches.
+  wait on disjoint work or end the turn (background results arrive between turns — never poll).
 
 ## the brief
 
@@ -75,7 +80,10 @@ return — by objective, not a checklist.
 
 - **A lane's report is a claim.** Merge the tree, run every gate on the merge, read the diff, check a
   handful of its citations. Recompute any count it proposes.
+- **An interrupted lane leaves a worktree, not nothing.** After a stop or model switch, inspect its
+  worktree (`git log`, `git status`); staged renames and uncommitted edits are usually sound, so
+  finish stragglers instead of re-dispatching from scratch.
 - **A failed lane is retried tighter, not repeated**: a smaller sample, a shorter brief, its partial
-  output as context.
+  output as context. If a route stalls, replace the family once or absorb inline — no retry loops.
 - **The integrator accepts only the whole tree green**, never a lane's own green.
 - Record in `log/agt.md` which lanes ran, on which model, and what was rejected.

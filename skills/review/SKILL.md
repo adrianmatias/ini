@@ -6,7 +6,9 @@ description: Use when a change, plan or artifact needs a critic before it ships.
 # review
 
 The author's model family shares its blind spots: self-review confirms. One independent pass by a
-different family, over a precisely cut context, finds what the author cannot.
+different family (rotate across available families in `AGENTS.md`, metering pay-per-token critics),
+over a precisely cut context, finds what the author cannot. Verify the critic's family differs from
+the author's before dispatching.
 
 ## what the critic gets
 
@@ -35,8 +37,9 @@ The integrator judges; the critic does not merge.
 
 1. **Reproduce** each blocking finding: run the failing input, read the quoted lines. A finding that
    does not reproduce is killed with its reason.
-2. **A kept finding becomes a failing test** (or a gate witness) before the fix, so it cannot come
-   back.
+2. **Give every finding an explicit disposition**: accept (add a failing test or witness before the
+   fix), accept-and-defer (reason and scope), or reject (one-line counter-evidence). Never repair
+   silently.
 3. **Narrow, do not inflate**: a finding may be true of one case and false as stated in general;
    keep the true part.
 4. When several findings share a premise, fix the premise once.

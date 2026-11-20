@@ -33,11 +33,12 @@ statement unnecessary.
 6. **A concept is a class; a component is a package.** The class owns its data, its rules and its
    workflow; the package states its role. Agents left alone write piles of functions that correct
    one another — a named class is where that stops.
-7. **The schema is the prompt.** A model that crosses a wire — to a file, a client or an LLM —
-   describes each field once, in the field. Prompts are rendered from the domain, so the words an
-   LLM reads cannot drift from the types the code checks.
+7. **The schema is the prompt.** A model that crosses a wire — to a file, a client, a report or an
+   agent — describes each field once, in the field; that description is the instruction. Rendered
+   artifacts take their words from the model, never from a copy beside it.
 8. **Declarative over imperative.** Describe the data — tables, specs, section lists — and let one
-   interpreter walk it. Artifacts are projections of the model: regenerated, never hand-edited.
+   interpreter walk it. Artifacts a tool renders are projections of the model: regenerated, never
+   hand-edited. Ledgers and evidence are the record itself: appended, never regenerated.
 9. **Proof over prose.** A rule is a gate that has been seen to fail, or it says why nothing can
    enforce it. Tests pin behaviour at the public surface; a narrow test is micromanagement.
 10. **Root cause always.** Reproduce, fix the cause, wire the check through the real entry point. A
@@ -87,6 +88,6 @@ Constraints distilled from people, kept only where they decide something the rul
 
 - **Taleb** — antifragile: an outage of one model, one vendor or one host degrades, never stops.
 - **Deutsch** — conjectures and refutations: a claim is kept until a test kills it, not until it
-  feels settled.
+  feels settled (`skills/dream`).
 - **Karpathy** — compile knowledge once into a wiki; do not re-retrieve the same sources each session.
 - **Chollet** — generalisation is the score; a benchmark the work was tuned on proves nothing.

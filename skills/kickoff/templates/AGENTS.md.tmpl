@@ -33,12 +33,12 @@ Machine-local: edit the right columns when providers change; skills speak in rol
 | role | model (2026-11) | effort |
 |---|---|---|
 | director | {{owner}} | — |
-| integrator | claude-opus on the Anthropic plan: plans, integrates, writes what the director reads | high |
-| lane | deepseek-v4.1-flash on the DeepSeek API: volume, parallel lanes | max |
-| critic | the family that did not write it: DeepSeek reviews Opus, Opus reviews DeepSeek | high |
+| integrator | `claude-opus` (plan, fixed cost) or `gemini-4` (pay-per-token complement) | high |
+| lane | `deepseek-v4.1-flash` on the DeepSeek API: volume, parallel lanes | max |
+| critic | distinct family from author (`claude-opus` ↔ `gemini-4` ↔ `deepseek-v4.1-flash`) | high |
 
-The default is one session, direct. Never run parallel lanes on the integrator's quota: four lanes
-on one plan exhausted its rate limit in three minutes.
+The default is one session, direct. Never run parallel lanes on a plan quota, and meter
+pay-per-token strong models (`gemini-4`) for targeted review or synthesis, never bulk.
 
 ## log
 
@@ -62,12 +62,14 @@ round that did it second.
 | `delegate` | work could fan out: roles, patterns, briefs, integration |
 | `restructure` | reshaping code without changing behaviour |
 | `compress` | a round ends, or code, docs or skills have grown |
+| `dream` | logs outpace docs or wiki: replay, pair, judge |
 | `harvest` | a lesson holds beyond this project, or ini has moved on |
 
 ## gates
 
 `uv run python -m ci gates` — red blocks the change; `--prove` plants a defect per gate in a scratch copy.
 Rules and the gate table: `code-standard.md`. Debt recorded in `ci/ceilings.json` only shrinks.
+`.githooks/pre-push` (`git config core.hooksPath .githooks`) blocks pushes to `main` when red.
 
 ## do
 

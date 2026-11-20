@@ -32,16 +32,24 @@ before anything moves.
 
 Write the script, do not hand-edit: a mapping table, `git mv`, rewrites for every form a name takes
 (`from pkg import x`, dotted `pkg.x.attr`, the string `"pkg.x"` of a `-m` target, file paths in
-prose). Let the suite list what the script missed; fix the class, not the instance.
+prose). Let the suite list what the script missed; fix the class, not the instance. Re-pin digests
+only after proving only path strings moved (map the new spelling back; the old digest returns).
+
+Moving free functions onto a class (`read_text(p)` → `Document(p).read_text()`) is an AST rewrite,
+not a regex: `skills/restructure/scripts/sweep_callsites.py` rewrites calls and imports by byte
+offset and refuses shadowing locals for hand editing.
 
 ## parallel lanes
 
 - **Cut along the import graph as it is**: read it from `domain.md`'s rendered block. A wave is one
   layer of it, leaves first; two packages that import each other are one lane.
+- **Dump debt per package first**: when findings exceed the CLI summary, read `ci.gates.table.GATES`
+  with `ci.gates.session.Session` before fanning out.
 - **A lane owns a package**, its run scripts and its behaviour file — never another lane's call
-  sites; it reports the edit it needed.
-- **Decide cross-cutting things before the fan-out** and commit them on the base: a rule change, a
-  dependency (`uv add`), a convention.
+  sites; it reports the edit it needed. List any symbols cross-component tests import from each
+  package so lanes keep them importable.
+- **Decide cross-cutting things and reshape shared kernel APIs on the base first**: a rule change, a
+  dependency (`uv add`), a convention, or an API every package imports.
 - **One worktree per lane** from the committed base; the lane commits there.
 - **Package lanes only compress inside packages.** With cross-package APIs frozen, each lane finds
   its best move outside its boundary. The redundancy left is a concept restated across packages
@@ -55,10 +63,15 @@ prose). Let the suite list what the script missed; fix the class, not the instan
 
 - **Merge on a clean tree**: commit or stash the director's uncommitted notes first — a botched
   merge is undone with `git reset --hard`, which destroys them.
-- One lane at a time, `--no-ff`; every gate on each merge, `--prove` on the result.
-- **Auto-resolve only import conflicts**; anything indented is resolved by hand, or concatenation
-  leaves both versions of a call.
+- One lane at a time, `--no-ff`; every gate on each merge, `--prove` on the result. Spot-check
+  merged lanes for `@staticmethod` piles or file-splitting meant only to pass `pile`.
+- **Auto-resolve only top-level `import`/`from` conflicts** (`ruff check --fix --select I`), and
+  audit with `git show --remerge-diff`; resolve indented code by hand. When lane A renamed a call
+  inside code lane B restructured, keep B's structure, replay A's diff, and let `types` find any
+  missed call sites.
 - Ratchet conflicts take every lane's lowered entry; `uv.lock` is regenerated with `uv lock`.
 - **Expect red from the merged toolchain**, not from the code: a lane that changed shared config
   makes other lanes' code fail rules they never ran under. Fix on the merge commit.
+- **`git mv` carries only tracked files**: ignored or untracked directories stay at the old path, so
+  use `rsync -a` + `rm -rf` when moving data or state trees.
 - Clean up: `git worktree remove`, delete merged branches, `git worktree prune`.

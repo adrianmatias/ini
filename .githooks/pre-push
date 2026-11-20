@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# The gate before main: a push that updates refs/heads/main runs every gate on the exact commit
+# being pushed, so whatever lands on main is deployable at any time without a CI service. Any
+# other branch or deletion passes untouched.
+#
+# Install once per clone (the file is tracked, the setting is not):
+#   git config core.hooksPath .githooks
+set -uo pipefail
+
+root=$(git rev-parse --show-toplevel) || exit 1
+cd "$root" || exit 1
+
+targets=()
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$local_sha" in
+    *[!0]*) ;;
+    *) continue ;;  # branch deletion (40- or 64-hex zero oid)
+  esac
+  if [ "$remote_ref" = "refs/heads/main" ]; then
+    targets+=("$local_sha")
+  fi
+done
+
+if [ "${#targets[@]}" -eq 0 ]; then
+  exit 0
+fi
+
+head_sha=$(git rev-parse HEAD 2>/dev/null || true)
+dirty=$(git status --porcelain 2>/dev/null || true)
+
+gate_commit() {
+  local sha="$1"
+  local short="${sha:0:7}"
+  echo "pre-push: every gate on $short, because main must stay deployable" >&2
+  if [ "$sha" = "$head_sha" ] && [ -z "$dirty" ]; then
+    env -u PYTHONPATH uv run --frozen python -m ci gates
+    return $?
+  fi
+  local tmp
+  tmp=$(mktemp -d "${TMPDIR:-/tmp}/ini-pre-push-XXXXXX") || return 1
+  git worktree add --quiet --detach "$tmp" "$sha" || {
+    rm -rf "$tmp"
+    return 1
+  }
+  local status=0
+  (
+    cd "$tmp" || exit 1
+    if [ -d "$root/.venv" ] && [ -z "${UV_PROJECT_ENVIRONMENT:-}" ]; then
+      export UV_PROJECT_ENVIRONMENT="$root/.venv"
+    fi
+    env -u PYTHONPATH uv run --frozen python -m ci gates
+  ) || status=$?
+  git worktree remove --force "$tmp" >/dev/null 2>&1 || rm -rf "$tmp"
+  return "$status"
+}
+
+for sha in "${targets[@]}"; do
+  if ! gate_commit "$sha"; then
+    echo "pre-push: gates red — main would not be deployable. Fix them, or push the work to a branch." >&2
+    exit 1
+  fi
+done

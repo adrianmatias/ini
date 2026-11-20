@@ -38,9 +38,9 @@ implementation`.
 | role | model (2026-11) | effort |
 |---|---|---|
 | director | mat | — |
-| integrator | claude-opus on the Anthropic plan | high |
-| lane | deepseek-v4.1-flash on the DeepSeek API | max |
-| critic | the family that did not write it | high |
+| integrator | `claude-opus` (plan, fixed cost) or `gemini-4` (pay-per-token complement) | high |
+| lane | `deepseek-v4.1-flash` on the DeepSeek API | max |
+| critic | distinct family from author (`claude-opus` ↔ `gemini-4` ↔ `deepseek-v4.1-flash`) | high |
 
 ## skills
 
@@ -54,6 +54,7 @@ The skills every copy keeps:
 | `delegate` | work could fan out: roles, patterns, briefs, integration |
 | `restructure` | reshaping code without changing behaviour |
 | `compress` | a round ends, or code, docs or skills have grown |
+| `dream` | logs outpace docs or wiki: replay, pair, judge |
 | `harvest` | a lesson holds beyond one project, or a project takes in ini |
 
 ## don't

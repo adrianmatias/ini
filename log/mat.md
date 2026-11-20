@@ -93,3 +93,11 @@ i reverted the fruit thing
 3. Back to ini: three harness fixes the project needed would help any project with a lot of data: the scratch-copy data link, running the test gate over both test folders, and treating field docstrings as text, not code. Say if you want them committed to ini.
 	1. ok but i do it from another session
 context at the latest prompt at the bottom of another project's log: today
+
+
+# 2026-11-20
+
+## prompt
+
+i have removed specific projects reference
+i Confirm run a cross-family critic pass, commit, and push.

@@ -106,3 +106,45 @@ Proved: gates 13/13, `--prove` 13/13, `uv run pytest` 12 passed.
   has no gate that counts literals. It came up as a lesson instead (`wiki/learnings.md` §1).
 
 Proved: gates 13/13, `--prove` 13/13, `uv run pytest` 14 passed.
+
+# 2026-11-20
+
+## harvest up: dream loop, push gate, AST call-site sweep and multi-family routing
+
+Phase: expand (harvest candidates across active projects since 2026-11-18) then compress.
+
+- **Field evidence (2026-11-18..20)**: harvested from two ongoing projects carrying ini distillates
+  (the first running 14 gates with a product gate and pre-push hook; a second newly distilled onto
+  all 13 gates with `--prove` 13/13), one new project started from a copy of 0.3.0 (13/13 green
+  after kickoff), and a non-code knowledge vault.
+- **Dream & Deutsch conjectures** (`skills/dream/SKILL.md`, `foundation.md` §lenses, `AGENTS.md`,
+  `skills/kickoff/templates/AGENTS.md.tmpl`): promoted the two-phase consolidation loop — replay
+  logs before sampling, cross-family daydream with verbatim machine-grounded quotes, and a
+  falsifiable `wiki/conjectures.md` register.
+- **Pre-push gate for `main`** (`.githooks/pre-push`, `code-standard.md`, `README.md`,
+  `skills/kickoff/SKILL.md`, `skills/kickoff/templates/AGENTS.md.tmpl`, `ci/tests/test_gates.py`):
+  gates the exact `$local_sha` pushed to `refs/heads/main` (using a detached worktree when not at
+  a clean `HEAD`), skipping branch pushes and all-zero deletions.
+- **Restructure & parallel lanes** (`skills/restructure/SKILL.md`,
+  `skills/restructure/scripts/sweep_callsites.py`, `ci/tests/test_skills.py`): added AST call-site
+  rewriting (handling split imports, refusing shadowing locals and local imports), per-package
+  `GATES`/`Session` debt dumping, base-first kernel reshaping, `@staticmethod`-pile spot-checks,
+  import-only conflict auto-resolution, and `rsync` residue cleanup after `git mv`.
+- **Billing-aware routing, review & recovery** (`AGENTS.md`, `AGENTS.md.tmpl`,
+  `skills/delegate/SKILL.md`, `skills/review/SKILL.md`): added three-family rotation (plan-backed vs
+  pay-per-token complement vs cheap API volume), harness-neutral pre-dispatch model checks, immediate
+  override cleanup, no subprocess LLM CLI calls, explicit finding dispositions, and resuming
+  interrupted lane worktrees.
+- **Standards & learnings** (`foundation.md` §engineering 7–8, `code-standard.md` §shape 4,
+  `wiki/learnings.md`): tightened wire-model/ledger rules, noted `object` narrowing at decode seams,
+  folded 8 lessons (6 new, 2 merged into existing rules) and dropped 4 intra-repo duplicates
+  (`wiki/learnings.md` 87 → 92/160 lines; `AGENTS.md` 74 → 75/120; all skills 56–90/150).
+- **Critic (`claude-opus-5-5`, cross-family)**: found 1 blocker (pre-push gated working tree
+  instead of `$local_sha`), 7 should-fix (split-import bug in `sweep_callsites.py`, `.git`
+  dependency in `test_gates.py`, stale redaction notes, unlogged field evidence in `now.md`,
+  learnings budget and 4 intra-repo duplicates, harness-specific `list`/`pin` terms in `delegate`)
+  and 3 notes (count mismatch, SHA-256 zero oid, non-existent `wiki/conjectures.md` citation). All
+  11 accepted and resolved, with tests added in `ci/tests/test_gates.py` and `ci/tests/test_skills.py`.
+
+Proved: `uv run pytest` 16 passed; `uv run python -m ci domain --write` unchanged;
+`uv run python -m ci gates` 13/13; `--prove` 13/13.

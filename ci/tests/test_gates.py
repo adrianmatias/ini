@@ -1,5 +1,7 @@
 """Behaviour of the gates on a started copy: verdicts, proofs and the ratchet."""
 
+import os
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -8,6 +10,7 @@ from ci.cli.main import main
 from ci.core.errors import IniError
 from ci.core.project import Project
 from ci.core.tool import Tool
+from ci.tests.conftest import ROOT
 
 CASCADE = "".join(f"    if x == {i}:\n        return {i}\n" for i in range(7))
 DEBT = f'"""Debt."""\n\n\ndef cascade(x: int) -> int:\n{CASCADE}    return -1\n'
@@ -130,3 +133,65 @@ def test_tests_inside_the_package_are_judged_as_tests(kicked_off, capsys) -> Non
 def test_an_unknown_gate_is_refused(kicked_off) -> None:
     with pytest.raises(SystemExit):
         gates(kicked_off, "--only", "style")
+
+
+def test_pre_push_hook_gates_only_main(tmp_path) -> None:
+    hook = ROOT / ".githooks" / "pre-push"
+    assert hook.is_file() and hook.stat().st_mode & 0o111
+    repo = tmp_path / "repo"
+    repo.mkdir()
+
+    def git(*args: str) -> str:
+        res = subprocess.run(["git", *args], cwd=repo, check=True, capture_output=True, text=True)
+        return res.stdout.strip()
+
+    git("init")
+    git("config", "user.name", "t")
+    git("config", "user.email", "t@example.com")
+    (repo / "f.txt").write_text("1\n")
+    git("add", "f.txt")
+    git("commit", "-m", "one")
+    first = git("rev-parse", "HEAD")
+    (repo / "f.txt").write_text("2\n")
+    git("commit", "-am", "two")
+    second = git("rev-parse", "HEAD")
+
+    stub = tmp_path / "bin" / "uv"
+    stub.parent.mkdir()
+    seen = tmp_path / "seen"
+    stub.write_text(
+        f'#!/usr/bin/env bash\ngit rev-parse HEAD >> {seen}\nexit "${{FAKE_UV_STATUS:-0}}"\n'
+    )
+    stub.chmod(0o755)
+    env = {**os.environ, "PATH": f"{stub.parent}:{os.environ['PATH']}", "FAKE_UV_STATUS": "1"}
+
+    def push(*refs: tuple[str, str, str, str], extra: dict[str, str] | None = None):
+        seen.unlink(missing_ok=True)
+        stdin = "".join(" ".join(ref) + "\n" for ref in refs)
+        return subprocess.run(
+            [str(hook)], cwd=repo, input=stdin, capture_output=True, text=True, env=extra or env
+        )
+
+    assert (
+        push(("refs/heads/lane/x", second, "refs/heads/lane/x", second)).returncode,
+        seen.exists(),
+    ) == (0, False)
+    assert (push(("(delete)", "0" * 40, "refs/heads/main", second)).returncode, seen.exists()) == (
+        0,
+        False,
+    )
+    assert (push(("(delete)", "0" * 64, "refs/heads/main", second)).returncode, seen.exists()) == (
+        0,
+        False,
+    )
+    red = push(("refs/heads/main", second, "refs/heads/main", second))
+    assert seen.read_text().strip() == second and red.returncode == 1
+    assert "would not be deployable" in red.stderr
+    green = push(
+        ("refs/heads/main", second, "refs/heads/main", second), extra={**env, "FAKE_UV_STATUS": "0"}
+    )
+    assert (green.returncode, seen.read_text().strip()) == (0, second)
+    branch_to_main = push(
+        ("refs/heads/other", first, "refs/heads/main", first), extra={**env, "FAKE_UV_STATUS": "0"}
+    )
+    assert (branch_to_main.returncode, seen.read_text().strip()) == (0, first)

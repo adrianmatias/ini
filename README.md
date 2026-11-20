@@ -46,9 +46,10 @@ The agent takes what fits and adapts it: a flat layout, a suite inside the packa
 
 | path | what | in a copy |
 |---|---|---|
-| `foundation.md`, `code-standard.md`, `wiki/learnings.md`, `skills/` | the knowledge: principles, rules, lessons, seven skills | kept, and owned by the project |
+| `foundation.md`, `code-standard.md`, `wiki/learnings.md`, `skills/` | the knowledge: principles, rules, lessons, eight skills | kept, and owned by the project |
 | `skills/kickoff/templates/` | the anchors with kickoff placeholders, and the walking skeleton (a `Target` and its loss, a run script, one behaviour test) | rendered by the kickoff |
 | `ci/` | the gates, the ratchet and the ontology renderer, run with `uv run python -m ci` | kept, as the project's own harness |
+| `.githooks/pre-push` | blocks pushes to `main` when gates are red (`git config core.hooksPath .githooks`) | kept, opt-in per clone |
 | `pyproject.toml` | the starter: Python ≥ 3.14, pydantic, the gate toolchain in the dev group | renamed; then the project's |
 | `objective.md`, `now.md`, `domain.md`, `AGENTS.md`, `log/` | ini's own anchors | replaced by the templates |
 

@@ -18,8 +18,8 @@ red while any kickoff placeholder is left in an anchor: work starts after the ob
    `package = "<package>"`, `tests = "tests"`, `scripts = ["ci"]`; pytest's `testpaths` becomes
    `["tests"]` and its `pythonpath` `["src"]`; `[tool.uv]` gives way to a `[build-system]` of
    `uv_build`, so `uv sync` installs the package and its run scripts resolve.
-3. `uv run python -m ci domain --write`, then `uv run python -m ci gates`: red only on the kickoff
-   placeholders, which the steps below answer.
+3. `git config core.hooksPath .githooks`, `uv run python -m ci domain --write`, then
+   `uv run python -m ci gates`: red only on the kickoff placeholders, which the steps below answer.
 
 ## 1. the objective (`objective.md`)
 

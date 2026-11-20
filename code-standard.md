@@ -32,9 +32,9 @@ standard that takes ten minutes to read is paraphrased, not followed.
    it is (`Field(description=...)` or a docstring under it with `use_attribute_docstrings=True`).
    A value that never leaves the process is a frozen `@dataclass(slots=True)`. A closed vocabulary
    is a `StrEnum`. No `TypedDict`, no dict-as-record. A rule that reads one record is its method.
-4. **Decode at the boundary, then trust.** Outside data is parsed once, where it enters. No `Any` in
-   a signature; every function outside the tests states its parameters and its return. The checker
-   is never silenced.
+4. **Decode at the boundary, then trust.** Outside data is parsed once, where it enters; a decode
+   seam takes `object` and narrows. No `Any` in a signature; every function outside the tests states
+   its parameters and its return. The checker is never silenced.
 5. **Declarative over imperative.** Complexity ≤ 6 in code, ≤ 15 in a test; past that, the data
    wants to be a table and the code its interpreter.
 6. **Constants are a tree.** A number or phrase with a domain meaning is a frozen field under one
@@ -74,7 +74,8 @@ standard that takes ten minutes to read is paraphrased, not followed.
 `uv run python -m ci gates` — red blocks the change. `--prove` plants a defect per gate in a scratch copy
 and fails if any gate lets it through: a gate you have not seen fail is not a gate. `--adopt`
 records an existing project's debt once; from then on the ratchet (`ci/ceilings.json`) only
-shrinks, and `--record` lowers it after a fix.
+shrinks, and `--record` lowers it after a fix. `.githooks/pre-push` (`git config core.hooksPath
+.githooks`) keeps `main` deployable by blocking a red push.
 
 | gate | catches |
 |---|---|

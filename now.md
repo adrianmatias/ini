@@ -4,23 +4,23 @@ What is true today; rewritten every round.
 
 ## state
 
-- 2026-11-18: ini is a repository of knowledge in the shape of a fresh repository, not an
-  installable package. The knowledge sits at the root like any project's: `foundation.md`,
-  `code-standard.md`, `wiki/learnings.md`, `skills/`. `ci/` holds the harness (13 gates, ratchet,
-  ontology), run from the tree with `uv run python -m ci`. The kickoff's templates hold the
-  placeholder anchors and the walking skeleton. There is no `base/`.
-- Distil, don't link: a project owns what it took from ini, in its own terms, with no dependency
-  and no recorded commit, and would stay green if ini vanished. Refreshing is an agent reading ini
-  as it is now and comparing by meaning. A departure from ini is either local fit or a lesson that
-  goes up.
-- First distillate in the field: an ongoing project took `ci/` as its own, added a product gate and
-  kept its own anchors. Its generic fixes came back up: the `--prove` replica links what it does
-  not copy (data), and the behaviour gate runs every suite `testpaths` names.
-- Proved: 14 behaviour tests, gates 13/13, `--prove` 13/13.
+- 2026-11-20: ini carries the knowledge at the root (`foundation.md`, `code-standard.md`,
+  `wiki/learnings.md`, eight `skills/`), `ci/` (13 gates, ratchet, ontology), `.githooks/pre-push`
+  (opt-in push gate for `main`), and the kickoff templates in `skills/kickoff/templates/`.
+- Field adoption (`objective.md` §target 2): two ongoing projects carry a distillate of ini (one
+  with a product gate and pre-push hook, one with all 13 gates), and one new project started from a
+  copy of 0.3.0 (13/13 green after kickoff).
+- Harvested up on 2026-11-20: `skills/dream`, `.githooks/pre-push`,
+  `skills/restructure/scripts/sweep_callsites.py` and parallel-wave merge rules, billing-aware
+  three-family routing (`claude-opus` / `gemini-4` / `deepseek`) and worktree recovery in
+  `delegate`/`review`, wire/evidence refinements in `foundation.md` and `code-standard.md`, and
+  generalised lessons in `wiki/learnings.md` (87 → 92/160 lines).
+- Proved: 16 behaviour tests, gates 13/13, `--prove` 13/13; cross-family critic (`claude-opus-5-5`)
+  found 1 blocker, 7 should-fix and 3 notes, all accepted and resolved.
 - No project, client or employer names anywhere in the repository, logs included.
 
 ## next
 
-1. Distil into a second ongoing project with an older runtime; Python 3.14 is still the harness
-   floor.
+1. Propagate `skills/dream`, `.githooks/pre-push` and routing updates into active projects on their
+   next refresh (`skills/harvest`, *down*), and test distilling into an older-runtime repository.
 2. Make the repository public when the director decides.
