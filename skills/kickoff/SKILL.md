@@ -34,6 +34,9 @@ Ask the director, in one message, only what the files cannot answer. Then write:
   criterion is a hobby; say so if that is what it is.
 - **What it is not** — the tempting adjacent product this project refuses to become.
 
+Register the project's open strategic or product bets in `wiki/conjectures.md` with their
+refutation conditions (`c1`, `c2`, …): a claim without a falsifier is a vibe.
+
 Mirror the target in code: `core/objective.py` holds a `Target` whose `loss(measured)` is zero
 when the objective is met. Keep it if the target is a metric; replace it with the project's own
 first entity if not. The behaviour test that pins it is the project's first contract.

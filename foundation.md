@@ -71,6 +71,8 @@ statement unnecessary.
   and years; a plugin binds the method to one tool.
 - **What generalises goes upstream.** A skill or lesson that holds in two projects moves into ini,
   and every project takes it in the next time an agent distils ini down.
+- **Record negative knowledge.** A failed round becomes one line in `wiki/learnings.md`, and a
+  refuted bet stays in `wiki/conjectures.md` (`destroyed`) with its evidence.
 - **Distil, don't link.** Inside a repository a fact has one home. Between repositories, sharing
   means either drifting copies or a dependency. Choose deliberate redundancy: an agent rewrites the
   shared knowledge into each project in that project's terms, with no pointer back. Each
@@ -87,7 +89,7 @@ bottleneck — what he reads is concise and complete, and his hours go to direct
 Constraints distilled from people, kept only where they decide something the rules above do not.
 
 - **Taleb** — antifragile: an outage of one model, one vendor or one host degrades, never stops.
-- **Deutsch** — conjectures and refutations: a claim is kept until a test kills it, not until it
-  feels settled (`skills/dream`).
+- **Deutsch** — conjectures and refutations: knowledge grows by hard-to-vary claims paired with what
+  would kill them (`wiki/conjectures.md`), kept or destroyed by test and replay (`skills/dream`).
 - **Karpathy** — compile knowledge once into a wiki; do not re-retrieve the same sources each session.
 - **Chollet** — generalisation is the score; a benchmark the work was tuned on proves nothing.

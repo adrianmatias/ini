@@ -36,6 +36,9 @@ another project goes up to ini (`skills/harvest`). Budget 160 lines (harness gat
 - **Name the metric the reader judges by before choosing by it.** A take-home failed on modularity
   (one file in twelve sections), missing tests, and a primary metric the reviewers did not share —
   calibration over PR-AUC (2026-10-29).
+- **Pair conjecture registers with log replay and a falsifier, or they stall into lore.** Standalone
+  conjecture boards went stale until coupled to `skills/dream` replay, machine-grounded quote
+  checks, and explicit refutation conditions (2026-11-20).
 
 ## 3. Generated artifacts are claims
 

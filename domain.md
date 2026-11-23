@@ -17,6 +17,7 @@ The words ini uses, then the ontology rendered from the code (`uv run python -m 
 | ratchet | recorded debt per gate and key that may shrink and never grow | an ignore list |
 | ontology | the components, entities and relations read from the code's syntax tree | a diagram drawn by hand |
 | wire model | a pydantic model: crosses a boundary, so each field describes itself | any class with fields |
+| conjecture | a falsifiable, hard-to-vary claim with an id and refutation condition in `wiki/conjectures.md` | a vibe |
 | kickoff | the round that turns a copy into a project and states its objective | a setup wizard |
 | harvest | a lesson or skill moving up from a project into ini, or ini moving down into a project | a copy-paste between repos |
 

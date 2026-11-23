@@ -28,6 +28,11 @@ def test_a_new_project_is_red_only_until_its_objective_is_stated(project, capsys
     assert out.count(" kickoff ") == 6
     for page in project.glob("*.md"):
         page.write_text(page.read_text().replace("TODO(kickoff)", "stated"))
+    conjectures = project / "wiki/conjectures.md"
+    assert conjectures.is_file()
+    conjectures_text = conjectures.read_text()
+    assert "belief demo pays for" in conjectures_text
+    assert "{{project}}" not in conjectures_text and "deliberate redundancy" not in conjectures_text
     assert gates(project) == 0
 
 

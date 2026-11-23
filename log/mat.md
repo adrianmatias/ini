@@ -101,3 +101,14 @@ context at the latest prompt at the bottom of another project's log: today
 
 i have removed specific projects reference
 i Confirm run a cross-family critic pass, commit, and push.
+
+# 2026-11-23
+
+## prompt
+
+harvest up into ini the knowledge management from the Deutsch lenses
+
+
+## prompt
+
+ok to me, commit-push this

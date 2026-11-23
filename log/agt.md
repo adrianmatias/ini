@@ -148,3 +148,40 @@ Phase: expand (harvest candidates across active projects since 2026-11-18) then 
 
 Proved: `uv run pytest` 16 passed; `uv run python -m ci domain --write` unchanged;
 `uv run python -m ci gates` 13/13; `--prove` 13/13.
+
+# 2026-11-23
+
+## harvest up: knowledge management from the Deutsch lenses
+
+Phase: expand (harvest Deutsch-lens knowledge structures from active projects) then compress.
+
+- **Conjecture register & starter template** (`wiki/conjectures.md`,
+  `skills/kickoff/templates/wiki/conjectures.md.tmpl`, `domain.md`, `README.md`, `AGENTS.md`,
+  `skills/kickoff/templates/AGENTS.md.tmpl`): added `ini`'s own live Deutsch board (`c1`–`c3` open,
+  `c4`–`c5` promoted, `c6`–`c8` destroyed with permanent ids) and a rendered starter template for new
+  copies, defined `conjecture` in `domain.md`, and wired `wiki/conjectures.md` into `AGENTS.md` /
+  `AGENTS.md.tmpl` entry, close, and `dream` triggers without conflating `ini`'s own bets with the
+  universal knowledge projects merge.
+- **Deterministic dream tool** (`skills/dream/scripts/dream.py`, `skills/dream/SKILL.md`,
+  `ci/tests/test_skills.py`): harvested and hardened `pairs`, `check`, and `feed` (`Decision`
+  `StrEnum`, `Pair`/`Candidate`/`Verdict` wire models, `--root` flag, `kind: "none"` skip,
+  self-link and path-qualified link checks, section-aware `## Dream links` insertion, and idempotent
+  `pairs.tsv` ledger appends).
+- **Epistemology & lifecycle alignment** (`foundation.md`, `wiki/learnings.md`,
+  `skills/kickoff/SKILL.md`, `skills/compress/SKILL.md`, `skills/harvest/SKILL.md`): recorded the
+  negative-knowledge rule (`learnings.md` + `destroyed` conjectures), tightened the Deutsch lens
+  around hard-to-vary falsifiable claims, and folded the field lesson that standalone conjecture
+  boards stall unless paired with log replay and falsifiers (`wiki/learnings.md` 96 → 99/160 lines;
+  `AGENTS.md` 75 → 76/120; all skills 56–89/150).
+- **Critic (`claude-opus-5-5`, cross-family)**: found 0 blockers, 6 should-fix (`check` rejecting
+  `kind: "none"` rows, `Verdict.verdict` plain `str` + empty `claim`, non-idempotent `pairs.tsv`
+  append, `## Dream links` inserting at EOF when another heading follows, `wiki/conjectures.md`
+  mixed classification across `domain.md`/`README.md`/`harvest`, and unsourced `cD3` / circular
+  `cP3` evidence) and 5 notes (permanent conjecture ids, weak template assertion in `test_gates.py`,
+  repeated destroyed-bet rule, stray `wiki/SCHEMA.md` line, and `E501` / dict-as-record /
+  path-collision / self-link bugs in `dream.py`). All 11 accepted and resolved with failing tests
+  written first.
+
+Proved: `uv run pytest` 18 passed; `ruff check` (with `E501`) and `ty check` clean on
+`skills/dream/scripts/dream.py`; `uv run python -m ci domain --write` clean; `uv run python -m ci
+gates` 13/13; `--prove` 13/13.

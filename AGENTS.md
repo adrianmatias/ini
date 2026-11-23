@@ -19,9 +19,10 @@ implementation`.
 ## what is special here
 
 - **Three audiences.** `foundation.md`, `code-standard.md`, `wiki/learnings.md` and `skills/` are
-  read by every agent in every project that carries them, so each line costs context everywhere. `skills/kickoff/templates/` becomes a new project's anchors. `ci/`
-  becomes every project's harness. ini's own anchors (this file, `objective.md`, `now.md`,
-  `domain.md`, `log/`) are replaced in a copy.
+  read by every agent in every project that carries them, so each line costs context everywhere.
+  `skills/kickoff/templates/` becomes a new project's anchors and starter `wiki/conjectures.md`.
+  `ci/` becomes every project's harness. ini's own anchors (this file, `objective.md`, `now.md`,
+  `domain.md`, `log/`) are replaced in a copy; `wiki/conjectures.md` holds ini's own live bets.
 - **A gate change ships with its witness**, and `--prove` stays 13/13 (or N/N): a gate that cannot
   be seen to fail is not merged.
 - **Projects distil ini; they never link to it.** No dependency, no submodule, no recorded commit.
@@ -54,7 +55,7 @@ The skills every copy keeps:
 | `delegate` | work could fan out: roles, patterns, briefs, integration |
 | `restructure` | reshaping code without changing behaviour |
 | `compress` | a round ends, or code, docs or skills have grown |
-| `dream` | logs outpace docs or wiki: replay, pair, judge |
+| `dream` | logs outpace docs or wiki, or `wiki/conjectures.md` stalls: replay, pair, judge |
 | `harvest` | a lesson holds beyond one project, or a project takes in ini |
 
 ## don't

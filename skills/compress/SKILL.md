@@ -36,6 +36,7 @@ harness that only grows exhausts the context it was meant to save and overfits t
 - One fact, one home. A fact in two pages is moved to the one that owns it and linked from the
   other.
 - `now.md` holds what is true today; it is rewritten, not appended.
+- Update `wiki/conjectures.md` when a bet settles; never let settled claims linger open.
 - Logs are append-only and never compressed: they are the record compression is judged against.
 
 ## the harness (skills, AGENTS.md, learnings)
@@ -45,7 +46,8 @@ The harness gate holds the budgets; this is how to stay under them with more kno
 - **Replay**: read the round's `log/agt.md` entries since the last compression. What procedure was
   done twice? What failed twice for the same reason?
 - **Promote**: a procedure done twice becomes a skill or a section of one; a lesson becomes one line
-  in `wiki/learnings.md`, under the failure class it prevents, with its evidence.
+  in `wiki/learnings.md`, under the failure class it prevents, with its evidence; a new strategic or
+  architectural bet enters `wiki/conjectures.md` with its falsifier.
 - **Merge**: two skills whose triggers overlap become one; a skill section nobody followed in the
   last rounds is deleted; detail that is read rarely moves to the skill's `references/`.
 - **Rank**: learnings are ordered by the cost of the failure they prevent; the bottom of a full

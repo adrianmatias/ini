@@ -19,8 +19,10 @@ From a local clone of ini (`git clone`, or `git -C <ini> pull` to refresh), on d
    - `ci/` without `ci/tests/`, adapted where the project needs it (a product gate of its own
      belongs there);
    - the knowledge, merged into the project's own `foundation.md`, `code-standard.md`,
-     `wiki/learnings.md` and `skills/`. Keep what the project obeys, drop what it never meets, and
-     use its domain's words. Where the project already says it, its line wins;
+     `wiki/learnings.md` and `skills/`, plus a starter `wiki/conjectures.md` from
+     `skills/kickoff/templates/wiki/conjectures.md.tmpl` if the project has none. Keep what the
+     project obeys, drop what it never meets, and use its domain's words. Where the project already
+     says it, its line wins;
    - a `[tool.ini]` that fits the layout: `src` (`"."` when flat), `package`, `tests` (it may sit
      inside the package), `scripts` (every directory of hand-run `.py` files; not notebooks);
    - the gate tools from ini's dev group into the project's (`uv add --dev`), and the skill rows in
@@ -44,8 +46,9 @@ Where a project departs from ini, the departure is either local fit or a lesson 
 1. **Generalise**: restate it as the class of failure or the procedure, with the incidents as
    evidence (dated). Strip project names a public repository should not carry.
 2. **Place it**: a principle in `foundation.md`, an enforceable rule in `code-standard.md` (and a
-   gate, if a machine can hold it), a lesson in `wiki/learnings.md`, a procedure in
-   `skills/<name>/SKILL.md`. Prefer extending an existing section to adding one.
+   gate, if a machine can hold it), a lesson in `wiki/learnings.md`, a cross-project bet in
+   `wiki/conjectures.md`, a procedure in `skills/<name>/SKILL.md`. Prefer extending an existing
+   section to adding one.
 3. **Edit ini**. A gate change ships with its witness and `uv run python -m ci gates --prove` green
    in ini.
 4. **Budget**: every agent in every project reads this. A promotion that adds lines removes some:
