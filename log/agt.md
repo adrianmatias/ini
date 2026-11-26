@@ -185,3 +185,5 @@ Phase: expand (harvest Deutsch-lens knowledge structures from active projects) t
 Proved: `uv run pytest` 18 passed; `ruff check` (with `E501`) and `ty check` clean on
 `skills/dream/scripts/dream.py`; `uv run python -m ci domain --write` clean; `uv run python -m ci
 gates` 13/13; `--prove` 13/13.
+
+- 2026-11-26: ACDC GitHub PR webhook probe for n8n gate verification.
