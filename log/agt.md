@@ -189,3 +189,5 @@ gates` 13/13; `--prove` 13/13.
 - 2026-11-26: ACDC GitHub PR webhook probe for n8n gate verification.
 
 - 2026-11-26: DeepSeek critic endpoint probe commit.
+
+- 2026-11-26: Verified updated DeepSeek ACDC workflow webhook probe.
