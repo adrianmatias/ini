@@ -112,3 +112,10 @@ harvest up into ini the knowledge management from the Deutsch lenses
 ## prompt
 
 ok to me, commit-push this
+
+
+# 2026-11-26
+
+## prompt
+
+not much
