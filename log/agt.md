@@ -187,3 +187,5 @@ Proved: `uv run pytest` 18 passed; `ruff check` (with `E501`) and `ty check` cle
 gates` 13/13; `--prove` 13/13.
 
 - 2026-11-26: ACDC GitHub PR webhook probe for n8n gate verification.
+
+- 2026-11-26: DeepSeek critic endpoint probe commit.
