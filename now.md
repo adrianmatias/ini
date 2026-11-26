@@ -28,3 +28,5 @@ What is true today; rewritten every round.
 1. Commit and push when the director confirms, then distil `wiki/conjectures.md` starter,
    `skills/dream/scripts/dream.py`, and Deutsch-lens rules into active projects on their next
    refresh (`skills/harvest`, *down*), and test distilling into an older-runtime repository.
+
+nothing else
